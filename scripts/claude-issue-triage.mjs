@@ -95,7 +95,7 @@ Respond with this exact JSON shape:
   }
 
   const data = await response.json();
-  const text = data?.content?.[0]?.text ?? data?.content?.[0]?.value ?? "";
+  const text = data?.content?.[0]?.text ?? "";
 
   return parseTriageResponse(text);
 }

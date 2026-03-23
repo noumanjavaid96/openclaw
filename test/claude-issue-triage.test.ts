@@ -1,7 +1,11 @@
-import { describe, expect, it } from "vitest";
+import { beforeAll, describe, expect, it } from "vitest";
 
-// The script exports parseTriageResponse as an ESM named export.
-const { parseTriageResponse } = await import("../scripts/claude-issue-triage.mjs");
+let parseTriageResponse: (raw: string) => { labels: string[]; comment: string };
+
+beforeAll(async () => {
+  const mod = await import("../scripts/claude-issue-triage.mjs");
+  parseTriageResponse = mod.parseTriageResponse;
+});
 
 describe("parseTriageResponse", () => {
   it("parses valid JSON with known labels", () => {
